@@ -167,6 +167,7 @@ function onVehicleUpdateHandler() {
     price: priceControl.value,
     imageLink: linkControl.value,
     features: featuresControl.value,
+    stockAvailability : stockAvailabilityControl.value,
     vehicleId: update_id,
   };
   let update_idx = vehicleArr.findIndex((el) => el.vehicleId === update_id);
@@ -175,11 +176,11 @@ function onVehicleUpdateHandler() {
   let update_tr = document.getElementById(update_id).children;
   update_tr[1].innerText = updated_obj.brand;
   update_tr[2].innerText = updated_obj.model;
-  update_tr[4].innerText = updated_obj.imageLink;
-  update_tr[5].innerText = updated_obj.price;
-  update_tr[6].innerText = updated_obj.color;
-  update_tr[7].innerText = updated_obj.features;
-  update_tr[8].innerText = updated_obj.stockAvailability;
+  // update_tr[3].innerText = updated_obj.imageLink;
+  update_tr[4].innerText = updated_obj.price;
+  update_tr[5].innerText = updated_obj.color;
+  update_tr[6].innerText = updated_obj.features;
+  update_tr[7].innerText = updated_obj.stockAvailability;
 
   vehicleForm.reset();
   updateVehicleBtn.classList.add("d-none");
@@ -217,7 +218,7 @@ function onVehicleDeleteHandler(ele) {
 
       Swal.fire({
         title: "Deleted!",
-        text: "Your file has been deleted.",
+        text: "Your vehicle has been deleted.",
         icon: "success",
       });
       //alter seriel number after delete
