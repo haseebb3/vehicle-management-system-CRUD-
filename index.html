@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+    integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+  <!-- <h3 class="text-center bg-info p-2">Vehicle management system</h3> -->
+
+
+  <section>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <div class="card border">
+            <form id="vehicleForm">
+              <h3 class="text-center bg-info p-2 " id="formHeading">Vehicle management system</h3>
+
+              <div class="card-body">
+                <div class="form-row">
+                  <div class="col-md-3 form-group">
+                    <label for="brand">Enter Car Brand<span class="text-danger">*</span></label>
+                    <input required type="text" id="brand" class="form-control">
+                  </div>
+                  <div class="col-md-3 form-group">
+                    <label for="model">Enter Car Model<span class="text-danger">*</span></label>
+                    <input required type="text" id="model" class="form-control">
+                  </div>
+                     <div class="col-md-3 form-group">
+                    <label for="color">Enter Color</label>
+                    <input type="text" id="color" class="form-control">
+                  </div>
+                 
+                  <div class="col-md-3 form-group">
+                    <label for="price">Enter Price<span class="text-danger">*</span></label>
+                    <input required type="number" id="price" class="form-control">
+                  </div>
+               
+                   <div class="col-md-4 form-group">
+                    <label for="link">Enter Image Link</label>
+                    <input type="url" id="link" class="form-control">
+                  </div>
+                  <div class="col-md-4 form-group">
+                    <label for="features">Enter Features</label>
+                    <input type="text" id="features" class="form-control">
+                  </div>
+
+                  <div class="col-md-4 form-group">
+                    <label for="stockAvailability">Stock Availability<span class="text-danger">*</span></label>
+                    <select id="stockAvailability" class="form-control">
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+
+
+                </div>
+                <div class="col-md-6 offset-md-3">
+                  <button type="submit" class="btn btn-sm btn-block btn-primary p-2 " id="addVehicleBtn">Add Vehical</button>
+                  <button type="button" class="btn btn-sm btn-block btn-primary d-none p-2" id="updateVehicleBtn">Update
+                    Vehical</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section>
+    <div class="container-fluid mt-3">
+
+      <div class="row">
+        <div class="col-12 table-responsive mb-5">
+          <div class="card">
+            <div class="card-body table-responsive">
+
+              <table class="table table-bordered table-hover">
+                <thead  class="bg-info">
+                  <tr>
+                    <th>Sr No</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Image Link</th>
+                    <th>Price</th>
+                    <th>Color</th>
+                    <th>Features</th>
+                    <th>Stock Availability</th>
+                    <th>Edit/Remove</th>
+                  </tr>
+                </thead>
+
+                <tbody id="vehicleTable">
+                  <!-- <tr>
+                    <td>1</td>
+                    <td>Mercedes</td>
+                    <td>Benz</td>
+                    <td><a href="javascript:;">javascript</a></td>
+                    <td>10000000</td>
+                    <td>Black</td>
+                    <td>SuperFeatures</td>
+                    <td>Yes</td>
+                    <td>
+                      <div class="d-flex justify-content-between align-items-center">
+                        <button type="button" class="btn btn-outline-success btn-sm" id="editVehicleBtn">Edit</button>
+                        <button type="button" class="btn btn-outline-danger btn-sm "
+                          id="removeVehicleBtn">Remove</button>
+                      </div>
+                    </td>
+                  </tr> -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="./assets/js/app.js"></script>
+</body>
+
+</html>

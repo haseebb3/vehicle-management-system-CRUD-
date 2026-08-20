@@ -1,0 +1,22 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  background-color: #ededed;
+}
+
+.card.border{
+      box-shadow:1px 3px 21px black;
+      border-radius: 10px;
+}
+
+#formHeading{
+  border-radius: 10px;
+}
+
+label{
+  font-size: 25px;
+}
