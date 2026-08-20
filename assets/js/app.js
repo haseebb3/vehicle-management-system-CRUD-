@@ -43,6 +43,10 @@ const defaultArr = [
   },
 ];
 
+const defaultVehicleImage ="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+
+
+
 let getArr = localStorage.getItem("vehicleArr");
 let vehicleArr;
 
@@ -53,8 +57,9 @@ if (getArr) {
   localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
 }
 
-const defaultVehicleImage =
-  "https://plus.unsplash.com/premium_photo-1737597230774-db90d2539f79?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8NXx8c2tldGNoJTIwb2YlMjBjYXJ8ZW58MHx8MHx8fDA%3D";
+
+
+
 
 // read
 function showVehicles(arr) {
