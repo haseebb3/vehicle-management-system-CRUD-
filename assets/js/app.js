@@ -43,9 +43,12 @@ const defaultArr = [
   },
 ];
 
-const defaultVehicleImage ="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
+const defaultVehicleImage =
+  "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
 
-
+function saveVehicles() {
+  localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
+}
 
 let getArr = localStorage.getItem("vehicleArr");
 let vehicleArr;
@@ -56,10 +59,6 @@ if (getArr) {
   vehicleArr = defaultArr;
   localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
 }
-
-
-
-
 
 // read
 function showVehicles(arr) {
@@ -108,7 +107,7 @@ function onFormSubmitHandler(event) {
   };
   vehicleForm.reset();
   vehicleArr.push(newVehicle);
-  localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
+  saveVehicles();
 
   let vehicleTr = document.createElement("tr");
   vehicleTr.id = newVehicle.vehicleId;
@@ -146,9 +145,7 @@ function onVehicleEditHandler(ele) {
   const edit_obj = vehicleArr.find((el) => el.vehicleId === edit_id);
   localStorage.setItem("update_id", edit_id);
   // patching data in form controls
-  // let update_trs = document.getElementById(edit_id).children;
-  // console.log(update_trs);
-  // update_trs[1].innerText = edit_obj.brand
+
   brandControl.value = edit_obj.brand;
   modelControl.value = edit_obj.model;
   colorControl.value = edit_obj.color;
@@ -165,23 +162,27 @@ function onVehicleEditHandler(ele) {
 function onVehicleUpdateHandler() {
   let update_id = localStorage.getItem("update_id");
   localStorage.removeItem("update_id");
-  let updated_obj = {
-    brand: brandControl.value,
-    model: modelControl.value,
-    color: colorControl.value,
-    price: priceControl.value,
-    imageLink: linkControl.value,
-    features: featuresControl.value,
-    stockAvailability : stockAvailabilityControl.value,
+  if (!update_id) return;
+  const updated_obj = {
+    brand: brandControl.value.trim(),
+    model: modelControl.value.trim(),
+    color: colorControl.value.trim(),
+    price: Number(priceControl.value),
+    imageLink: linkControl.value.trim(),
+    features: featuresControl.value.trim(),
+    stockAvailability: stockAvailabilityControl.value,
     vehicleId: update_id,
   };
   let update_idx = vehicleArr.findIndex((el) => el.vehicleId === update_id);
+  if (update_idx === -1) return;
+
   vehicleArr[update_idx] = updated_obj;
-  localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
+  saveVehicles();
   let update_tr = document.getElementById(update_id).children;
   update_tr[1].innerText = updated_obj.brand;
   update_tr[2].innerText = updated_obj.model;
-  // update_tr[3].innerText = updated_obj.imageLink;
+  update_tr[3].querySelector("a").href =
+    updated_obj.imageLink || defaultVehicleImage;
   update_tr[4].innerText = updated_obj.price;
   update_tr[5].innerText = updated_obj.color;
   update_tr[6].innerText = updated_obj.features;
@@ -194,7 +195,7 @@ function onVehicleUpdateHandler() {
   Swal.fire({
     text: `Vehicle ${updated_obj.brand} ${updated_obj.model} is updated successfully`,
     icon: "success",
-    timer: 25000,
+    timer: 2500,
   });
 
   // let item_tobe_deleted = document.getElementById(update_id).previousElementSibling;
@@ -205,6 +206,7 @@ function onVehicleUpdateHandler() {
 function onVehicleDeleteHandler(ele) {
   let dlt_id = ele.dataset.deleteId;
   let dlt_obj = vehicleArr.find((el) => el.vehicleId === dlt_id);
+  if (!dlt_obj) return;
 
   Swal.fire({
     title: "Are you sure?",
@@ -217,14 +219,16 @@ function onVehicleDeleteHandler(ele) {
   }).then((result) => {
     if (result.isConfirmed) {
       let dlt_idx = vehicleArr.findIndex((el) => el.vehicleId === dlt_id);
+      if (dlt_idx === -1) return;
       vehicleArr.splice(dlt_idx, 1);
-      localStorage.setItem("vehicleArr", JSON.stringify(vehicleArr));
+      saveVehicles();
       ele.closest("tr").remove();
 
       Swal.fire({
         title: "Deleted!",
         text: "Your vehicle has been deleted.",
         icon: "success",
+        timer : 2500
       });
       //alter seriel number after delete
       let alterTrs = document.querySelectorAll(
